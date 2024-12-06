@@ -1,4 +1,3 @@
-import math
 import time
 from functools import cmp_to_key
 
@@ -20,6 +19,10 @@ def part_one(data):
 
 def part_two(data):
     return sum(
+        # Sort by number of rules applicable
+        # sorted(nums, key=lambda x: sum(x == rule[0] for rule in filter(lambda t: t[0] in nums and t[1] in nums, rules)))[len(nums) // 2]
+
+        # Sort by checking if current order is allowed by the rules
         sorted(nums, key=cmp_to_key(lambda x, y: 1 if any(a == y and b == x for a, b in rules) else -1))[len(nums) // 2]
         for line in data[1].splitlines()
         if (nums := [int(x) for x in line.split(',')])
