@@ -5,8 +5,8 @@ from lib import load_input
 
 
 def solve(data):
-    return part_one(data.splitlines())
-    # return part_two(data.splitlines())
+    # return part_one(data.splitlines())
+    return part_two(data.splitlines())
 
 
 def part_one(data):
