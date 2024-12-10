@@ -10,20 +10,15 @@ def solve(data):
 
 
 def part_one(data):
-    res = 0
-    for x, y in ((x, y) for x in range(len(data[0])) for y in range(len(data)) if data[y][x] == '0'):
-        todo = [(x, y, 0)]
-        ends = set()
-        while todo:
-            x, y, v = todo.pop()
-            if v == 9:
-                ends.add((x, y))
-            for dx, dy in ((-1, 0), (1, 0), (0, -1), (0, 1)):
-                if (0 <= x + dx < len(data[0]) and 0 <= y + dy < len(data)
-                        and (new_v := data[y + dy][x + dx]).isnumeric() and int(new_v) == v + 1):
-                    todo.append((x + dx, y + dy, int(new_v)))
-        res += len(ends)
-    return res
+    def can_find_path_from(x, y):
+        v = int(data[y][x])
+        if v == 9:
+            return {(x, y)}
+        return set().union(*(can_find_path_from(x + dx, y + dy) for dx, dy in ((-1, 0), (1, 0), (0, -1), (0, 1))
+                   if (0 <= x + dx < len(data[0]) and 0 <= y + dy < len(data)
+                       and (new_v := data[y + dy][x + dx]).isnumeric() and int(new_v) == v + 1)))
+
+    return sum(len(can_find_path_from(x, y)) for x in range(len(data[0])) for y in range(len(data)) if data[y][x] == '0')
 
 
 def part_two(data):
