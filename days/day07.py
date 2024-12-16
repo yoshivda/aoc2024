@@ -20,7 +20,6 @@ def part_two(data):
 
 
 def can_sum_to(nums, total, pt2=False):
-    print(nums, total)
     if total < 0:
         return False
     if len(nums) == 1:

@@ -40,8 +40,6 @@ def part_one(data):
     return sum(sum(j * int(c) for j in range(i, i + l)) for i, c, l in total)
 
 
-
-
 def part_two(data):
     length = 0
     blocks = []
